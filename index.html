@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>For Asees 💗</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: linear-gradient(to bottom, #ffe4ec, #ffffff, #e0f2ff);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      overflow: hidden;
+    }
+
+    .card {
+      background: rgba(255,255,255,0.85);
+      backdrop-filter: blur(15px);
+      padding: 30px;
+      border-radius: 25px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+      width: 90%;
+      max-width: 420px;
+      position: relative;
+      z-index: 2;
+    }
+
+    h2 { color: #e11d48; }
+
+    .text {
+      min-height: 90px;
+      font-size: 18px;
+      margin-bottom: 15px;
+    }
+
+    button {
+      margin: 5px;
+      padding: 10px 18px;
+      border: none;
+      background: linear-gradient(45deg, #f472b6, #fb7185);
+      color: white;
+      border-radius: 20px;
+      cursor: pointer;
+    }
+
+    .back {
+      background: #ddd;
+      color: black;
+    }
+
+    input {
+      padding: 10px;
+      border-radius: 20px;
+      border: 1px solid #ccc;
+      text-align: center;
+    }
+
+    .hidden { display: none; }
+
+    .final {
+      font-size: 26px;
+      color: #e11d48;
+      text-shadow: 0 0 10px #f472b6, 0 0 25px #fb7185;
+      animation: glow 1.5s infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #f472b6; }
+      to { text-shadow: 0 0 25px #fb7185; }
+    }
+
+    .snow { position:absolute; width:100%; height:100%; pointer-events:none; }
+    .flake {
+      position:absolute;
+      width:6px; height:6px;
+      background:white;
+      border-radius:50%;
+      animation: fall linear infinite;
+    }
+
+    @keyframes fall {
+      0% { transform: translateY(-10px); }
+      100% { transform: translateY(100vh); }
+    }
+  </style>
+</head>
+
+<body>
+
+<div class="snow" id="snow"></div>
+
+<!-- LOCK -->
+<div class="card" id="lock">
+  <h2>🔐 Only for you</h2>
+  <p>This isn’t for everyone… just you 😌</p>
+  <input id="pass" type="password" placeholder="Enter password" />
+  <br/>
+  <button onclick="unlock()">Unlock 💌</button>
+</div>
+
+<!-- STORY -->
+<div class="card hidden" id="story">
+  <h2>🌹❄️ For Asees ❄️🌹</h2>
+  <p id="text" class="text"></p>
+  <button onclick="next()">Next 💌</button>
+  <button class="back" onclick="prev()">Back</button>
+</div>
+
+<!-- PLAYFUL -->
+<div class="card hidden" id="playful1">
+  <h2>Quick question 😏</h2>
+  <p class="text">Be honest… what am I to you?</p>
+
+  <button onclick="playfulAns('best')">Best thing ever 💗</button>
+  <button onclick="playfulAns('okay')">Just okay 😶</button>
+  <button onclick="playfulAns('annoying')">Annoying 😏</button>
+
+  <button class="back" onclick="backToStory()">Back</button>
+</div>
+
+<!-- LETTERS -->
+<div class="card hidden" id="letters">
+  <h2>Letters for you 💌</h2>
+  <button onclick="reveal(0)">Letter 1</button>
+  <button onclick="reveal(1)">Letter 2</button>
+  <button onclick="reveal(2)">Letter 3</button>
+  <button onclick="reveal(3)">Final Letter</button>
+  <p id="letterText" class="text"></p>
+  <button onclick="toCute()">Next 💌</button>
+  <button class="back" onclick="backToStory()">Back</button>
+</div>
+
+<!-- CUTE -->
+<div class="card hidden" id="cute">
+  <h2>Why is Asees so cute? 😏</h2>
+  <p class="text">
+    Because you smile without trying 💗<br>
+    Because you make people feel comfortable 😌<br>
+    Because you care in ways most people don’t 🌹<br>
+    And honestly… you don’t even realize how special you are ✨
+  </p>
+  <button onclick="toLove()">Next 💌</button>
+  <button class="back" onclick="backToLetters()">Back</button>
+</div>
+
+<!-- LOVE -->
+<div class="card hidden" id="love">
+  <h2>Why I love you 💗</h2>
+  <p class="text">
+    I love you because you’re real.<br>
+    I love you because you bring peace into my chaos.<br>
+    I love you because you make everything feel lighter.<br>
+    And most importantly…<br>
+    I love you because you’re you.
+  </p>
+  <button onclick="toFinalChoice()">Next 💌</button>
+  <button class="back" onclick="backToCute()">Back</button>
+</div>
+
+<!-- FINAL CHOICE -->
+<div class="card hidden" id="finalChoice">
+  <h2>See Kevin’s Message? 💌</h2>
+
+  <button onclick="trap()">Don’t click this 😌</button>
+
+  <button onclick="final()">Yes</button>
+  <button onclick="final()">Yes</button>
+  <button class="back" onclick="backToLove()">Back</button>
+</div>
+
+<!-- FINAL -->
+<div class="card hidden" id="final">
+  <div class="final">
+    Kevin’s message for you… 💌<br><br>
+    There’s only one truth in this world… 💗<br><br>
+    I love you to infinity ♾️❤️
+  </div>
+
+  <br>
+
+  <button onclick="toMiss()">Next 😏</button>
+  <button class="back" onclick="backToFinalChoice()">Back</button>
+</div>
+
+<!-- MISS SECTION -->
+<div class="card hidden" id="miss">
+  <h2>One last thing… 😌</h2>
+  <p class="text">Do you miss me?</p>
+
+  <button onclick="miss('yes')">Yes 😏</button>
+  <button onclick="miss('no')">No 🙄</button>
+
+  <button class="back" onclick="backToFinal()">Back</button>
+</div>
+
+<script>
+let step = 0;
+
+const story = [
+  "Hey you… yeah YOU 👀",
+  "Don’t skip this… I made this just for you 😌",
+  "Because you’re worth every second 💗",
+  "I’m sorry for the last two days…",
+  "But you mean everything to me",
+  "You’re my peace… my comfort… my person 💗"
+];
+
+function unlock() {
+  if (document.getElementById("pass").value === "Aishiteru") {
+    document.getElementById("lock").classList.add("hidden");
+    document.getElementById("story").classList.remove("hidden");
+    document.getElementById("text").innerText = story[0];
+  }
+}
+
+function next() {
+  step++;
+  if (step < story.length) {
+    document.getElementById("text").innerText = story[step];
+  } else {
+    document.getElementById("story").classList.add("hidden");
+    document.getElementById("playful1").classList.remove("hidden");
+  }
+}
+
+function prev() {
+  if (step > 0) {
+    step--;
+    document.getElementById("text").innerText = story[step];
+  }
+}
+
+function playfulAns(type) {
+  alert(type === "best" ? "Correct 😌💗" : "Still your favorite 😏");
+  document.getElementById("playful1").classList.add("hidden");
+  document.getElementById("letters").classList.remove("hidden");
+}
+
+const letters = [
+  "You’re my peace 🤍",
+  "You make everything feel better 🌸",
+  "I’m lucky to have you 💗",
+  "No matter what… I’m always here ❤️"
+];
+
+function reveal(i) {
+  document.getElementById("letterText").innerText = letters[i];
+}
+
+function toCute() {
+  document.getElementById("letters").classList.add("hidden");
+  document.getElementById("cute").classList.remove("hidden");
+}
+
+function toLove() {
+  document.getElementById("cute").classList.add("hidden");
+  document.getElementById("love").classList.remove("hidden");
+}
+
+function toFinalChoice() {
+  document.getElementById("love").classList.add("hidden");
+  document.getElementById("finalChoice").classList.remove("hidden");
+}
+
+function final() {
+  document.getElementById("finalChoice").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+}
+
+function trap() {
+  alert("You never listen do you? 😏💗");
+}
+
+function toMiss() {
+  document.getElementById("final").classList.add("hidden");
+  document.getElementById("miss").classList.remove("hidden");
+}
+
+function miss(answer) {
+  if (answer === "yes") {
+    window.location.href = "tel:6398956782";
+  } else {
+    alert("Liar 😏 you definitely do");
+  }
+}
+
+/* BACK FUNCTIONS */
+function backToStory() {
+  document.getElementById("playful1").classList.add("hidden");
+  document.getElementById("letters").classList.add("hidden");
+  document.getElementById("story").classList.remove("hidden");
+}
+
+function backToLetters() {
+  document.getElementById("cute").classList.add("hidden");
+  document.getElementById("letters").classList.remove("hidden");
+}
+
+function backToCute() {
+  document.getElementById("love").classList.add("hidden");
+  document.getElementById("cute").classList.remove("hidden");
+}
+
+function backToLove() {
+  document.getElementById("finalChoice").classList.add("hidden");
+  document.getElementById("love").classList.remove("hidden");
+}
+
+function backToFinalChoice() {
+  document.getElementById("final").classList.add("hidden");
+  document.getElementById("finalChoice").classList.remove("hidden");
+}
+
+function backToFinal() {
+  document.getElementById("miss").classList.add("hidden");
+  document.getElementById("final").classList.remove("hidden");
+}
+
+/* Snow */
+const snow = document.getElementById("snow");
+for (let i = 0; i < 50; i++) {
+  const flake = document.createElement("div");
+  flake.classList.add("flake");
+  flake.style.left = Math.random() * 100 + "vw";
+  flake.style.animationDuration = (Math.random() * 5 + 5) + "s";
+  snow.appendChild(flake);
+}
+</script>
+
+</body>
+</html>
